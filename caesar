@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <cs50.h>
+#include <stdlib.h>
+#include <string.h>
+void cap (char a, int k);
+void small (char a, int k);
+bool valid (string s);
+
+
+int main (int argc , string argv[])
+{
+    if (argc == 2 || valid(argv[1]))
+    {
+        int k = atoi(argv[1]); //the k
+        string s = get_string("plaintext: ");
+        printf("ciphertext: ");
+        for (int i =0; i <= strlen(s) ;i++)
+        {
+            if (isalpha(s[i]))
+            {
+                if (isupper(s[i]))
+                 { cap(s[i], k); }
+                else
+                 { small(s[i], k); }
+            }
+            else
+             { printf("%c", s[i]); }
+        }
+        printf("\n");
+    }
+    else
+    {
+        printf("Usage: ./caesar key \n");
+        return 1; //exit
+    }
+}
+
+
+
+bool valid (string s)
+{
+    bool b = true;
+    for (int i = 0 ; i <= strlen(s) ;i++)
+    {
+
+        if (isdigit(s[i]))
+         b = true;
+        else
+         b = false;
+    }
+    return b;
+}
+
+void cap (char a , int k)
+{
+    a -= 65;
+    a = (a + k) % 26;
+    a += 65;
+    printf("%c", a);
+}
+
+void small (char a , int k)
+{
+    a -= 97;
+    a = (a + k) % 26;
+    a += 97;
+    printf("%c", a);
+}
+
